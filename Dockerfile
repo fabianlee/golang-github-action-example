@@ -6,6 +6,7 @@ RUN mkdir /build
 ADD src/* /build/
 WORKDIR /build
 
+ARG OWNER=fabianlee
 ARG PROJECT=golang-github-action-example
 
 # accept override of value from --build-args
@@ -13,7 +14,7 @@ ARG MY_VERSION=0.0.0
 ARG MY_BUILTBY=unknown
 
 # create module, fetch dependencies, then build
-RUN go mod init fabianlee/${PROJECT} \
+RUN go mod init ${OWNER}/${PROJECT} \
    && go mod tidy \
    && CGO_ENABLED=0 GOOS=linux go build -ldflags "-X main.Version=${MY_VERSION} -X main.BuiltBy=${MY_BUILTBY}" main.go
 
