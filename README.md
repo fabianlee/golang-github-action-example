@@ -39,7 +39,7 @@ git tag -d $todel && git push origin :refs/tags/$todel
 # Deleting release
 
 ```
-todel=v1.0.1
+todel=r1.0.1
 
 # delete release and remote tag
 gh release delete $todel --cleanup-tag -y
