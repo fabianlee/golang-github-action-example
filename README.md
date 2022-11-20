@@ -2,22 +2,31 @@
 
 GoLang http web server running on port 8080 used to illustrate GitHub Actions as Continuous Deployment pipeline for GoLang static binary and OCI-compatible image published to Docker Hub and Github Container Registry.
 
-Image is based on busybox:1.32.1-glibc, is small (~11Mb) because it takes advantage of multi-stage building
+# GitHub Workflow for building OCI image
 
-docker hub: https://hub.docker.com/r/fabianlee/golang-github-action-example
+(github-actions-buildOCI.yml)[.github/workflows/github-actions-buildOCI.yml] creates an Image base on busybox:glibc using (Dockerfile)[dockerfile].
 
-# Makefile targets
-* docker-build (builds image)
-* docker-test-fg (runs container in foreground, ctrl-C to exit)
-* docker-run-bg (runs container in background)
-* k8s-apply (applies deployment to kubernetes cluster)
-* k8s-delete (removes deployment on kubernetes cluster)
+This is triggered by creating a tag that looks like the semantic tag "vX.Y.Z".
 
-# Create Github release
+```
+newtag=v1.0.1; git tag $newtag && git push origin $newtag
+```
 
-Must have [Go Lang](https://fabianlee.org/2022/10/29/golang-installing-the-go-programming-language-on-ubuntu-22-04/) compiler and [Github CLI](https://fabianlee.org/2022/04/21/github-cli-tool-for-repository-operations/) installed on local host as prerequisite.
+The image is published at:
+* (Docker Hub)[https://hub.docker.com/r/fabianlee/golang-github-action-example]
+* (Google Container Registry)[https://github.com/fabianlee?tab=packages&repo_name=golang-github-action-example]
 
-Github Actions will automatically build OCI image based on tags that look like semantic version.
+
+# Github Workflow for creating static binary release
+
+(github-actions-release.yml)[.github/workflows/github-actions-release.yml] creates a statically compiled GoLang binary along with Release Notes consisting of the relevant git commit messages.
+
+This is triggered by creating a tag that looks like the semantic tag "rX.Y.Z".
+
+```
+newtag=r1.0.1; git tag $newtag && git push origin $newtag
+```
+
 
 # Creating tag
 
