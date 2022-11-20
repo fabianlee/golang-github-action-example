@@ -101,5 +101,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             MY_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
-            MY_BUILTBY=Github Action based on event from ${{ github.actor }}
+            MY_BUILTBY=github-action
 
