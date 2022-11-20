@@ -1,22 +1,10 @@
 # Summary
-Golang http web server running by default on port 8080 that is intended for testing OS level signal catching
+
+GoLang http web server running on port 8080 used to illustrate GitHub Actions as Continuous Deployment pipeline for GoLang static binary and OCI-compatible image published to Docker Hub and Github Container Registry.
 
 Image is based on busybox:1.32.1-glibc, is small (~11Mb) because it takes advantage of multi-stage building
 
-docker hub: https://hub.docker.com/r/fabianlee/docker-golang-signal-web
-
-# Example of sending OS level signals
-
-```
-  sudo kill -SIGINT <PID>
-  sudo kill -SIGUSR1 <PID>
-```
-
-# Environment variables
-
-* PORT - listen port, defaults to 8080
-* APP_CONTEXT - base context path of app, defaults to '/'
-
+docker hub: https://hub.docker.com/r/fabianlee/golang-github-action-example
 
 # Makefile targets
 * docker-build (builds image)
@@ -29,11 +17,7 @@ docker hub: https://hub.docker.com/r/fabianlee/docker-golang-signal-web
 
 Must have [Go Lang](https://fabianlee.org/2022/10/29/golang-installing-the-go-programming-language-on-ubuntu-22-04/) compiler and [Github CLI](https://fabianlee.org/2022/04/21/github-cli-tool-for-repository-operations/) installed on local host as prerequisite.
 
-Github Actions will automatically build OCI image based on this new semantic version.
-
-```
-./create_new_gh_release.sh
-```
+Github Actions will automatically build OCI image based on tags that look like semantic version.
 
 # Creating tag
 
