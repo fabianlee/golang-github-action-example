@@ -40,9 +40,9 @@ jobs:
     - run: |
         go version
         cd src
-        go mod init ${GITHUB_REF_NAME}
+        go mod init ${GITHUB_REPOSITORY}
         go mod tidy
-        go build -ldflags "-X main.Version=$(GITHUB_REF_NAME) -X main.BuiltBy=github-actions" main.go
+        go build -ldflags "-X main.Version=${GITHUB_REF_NAME} -X main.BuiltBy=github-actions" main.go
 
     - run: git version
     - run: git branch
